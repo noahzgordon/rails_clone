@@ -11,15 +11,32 @@ class Params
     if req.query_string
       @params.merge!(parse_www_encoded_form(req.query_string))
     end
+
+    @permitted = []
   end
 
   def [](key)
     @params[key]
   end
 
+  def permit(*keys)
+    @permitted.push *keys
+  end
+
+  def require(key)
+    raise AttributeNotFoundError unless @params.has_key?(key)
+    @params[key]
+  end
+
+  def permitted?(key)
+    @permitted.include?(key)
+  end
+
   def to_s
     @params.to_json.to_s
   end
+
+  class AttributeNotFoundError < ArgumentError; end;
 
   private
   def parse_www_encoded_form(www_encoded_form)
