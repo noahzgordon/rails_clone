@@ -1,11 +1,12 @@
 require 'erb'
 require_relative 'params'
 require_relative 'session'
+require 'active_support/inflector'
 
 class ControllerBase
-  attr_reader :params
+  attr_reader :params, :req, :res
 
-  def initialize(req, res, route_params)
+  def initialize(req, res, route_params={})
     @req = req
     @res = res
 
