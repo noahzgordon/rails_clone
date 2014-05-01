@@ -7,7 +7,8 @@ class Route
   end
 
   def matches?(req)
-    http_method == req.request_method.downcase.to_sym && pattern.match(req.path)
+    http_method == req.request_method.downcase.to_sym &&
+      pattern.match(req.path)
   end
 
   def run(req, res)
@@ -15,7 +16,7 @@ class Route
 
     route_params = {}
     match_data.names.each do |name|
-      route_params[name] = match_data[name]
+      route_params[name.to_sym] = match_data[name]
     end
 
     @controller_class

@@ -12,7 +12,8 @@ describe 'the symphony of things' do
       end
 
       def route_does_params
-        render_content("got ##{ params["id"] }", 'text/text')
+        p params
+        render_content("got ##{ params[:id] }", 'text/text')
       end
 
       def update_session
@@ -24,7 +25,12 @@ describe 'the symphony of things' do
 
   describe 'routes and params' do
     it 'route instantiates controller and calls invoke action' do
-      route = Route.new(Regexp.new('^/statuses/(?<id>\\d+)$'), :get, Ctrlr, :route_render)
+      route = Route.new(
+        Regexp.new('^/statuses/(?<id>\\d+)$'),
+        :get,
+        Ctrlr,
+        :route_render
+      )
       req.stub(:path) { '/statuses/1' }
       req.stub(:request_method) { :get }
       route.run(req, res)
@@ -32,7 +38,12 @@ describe 'the symphony of things' do
     end
 
     it 'route adds to params' do
-      route = Route.new(Regexp.new('^/statuses/(?<id>\\d+)$'), :get, Ctrlr, :route_does_params)
+      route = Route.new(
+        Regexp.new('^/statuses/(?<id>\\d+)$'),
+        :get,
+        Ctrlr,
+        :route_does_params
+      )
       req.stub(:path) { '/statuses/1' }
       req.stub(:request_method) { :get }
       route.run(req, res)
