@@ -12,7 +12,6 @@ describe 'the symphony of things' do
       end
 
       def route_does_params
-        p params
         render_content("got ##{ params[:id] }", 'text/text')
       end
 
@@ -24,6 +23,11 @@ describe 'the symphony of things' do
   end
 
   describe 'routes and params' do
+    before(:each) do
+      allow(req).to receive(:path) { '/statuses/1' }
+      allow(req).to receive(:request_method) { :get }
+    end
+
     it 'route instantiates controller and calls invoke action' do
       route = Route.new(
         Regexp.new('^/statuses/(?<id>\\d+)$'),
@@ -31,10 +35,8 @@ describe 'the symphony of things' do
         Ctrlr,
         :route_render
       )
-      req.stub(:path) { '/statuses/1' }
-      req.stub(:request_method) { :get }
       route.run(req, res)
-      res.body.should == 'testing'
+      expect(res.body).to eq('testing')
     end
 
     it 'route adds to params' do
@@ -44,10 +46,8 @@ describe 'the symphony of things' do
         Ctrlr,
         :route_does_params
       )
-      req.stub(:path) { '/statuses/1' }
-      req.stub(:request_method) { :get }
       route.run(req, res)
-      res.body.should == 'got #1'
+      expect(res.body).to eq('got #1')
     end
   end
 
@@ -55,13 +55,13 @@ describe 'the symphony of things' do
     let(:ctrlr) { Ctrlr.new(req, res) }
 
     it 'exposes a session via the session method' do
-      ctrlr.session.should be_instance_of(Session)
+      expect(ctrlr.session).to be_a(Session)
     end
 
     it 'saves the session after rendering content' do
       ctrlr.update_session
-      res.cookies.count.should == 1
-      JSON.parse(res.cookies[0].value)['token'].should == 'testing'
+      expect(res.cookies.count).to eq(1)
+      expect(JSON.parse(res.cookies[0].value)['token']).to eq('testing')
     end
   end
 end

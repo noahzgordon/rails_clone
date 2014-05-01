@@ -15,5 +15,5 @@ generally follow the progression of the project.
 
 Run `rake` to run all the spec files.
 
-If you're feeling extra fancy you can run [guard](https://github.com/guard/guard)! 
-just type `guard`
+If you're feeling extra fancy you can run
+[guard](https://github.com/guard/guard)! just type `guard`

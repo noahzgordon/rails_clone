@@ -40,7 +40,7 @@ router.draw do
 end
 
 server.mount_proc '/' do |req, res|
-  route = router.run(req, res)
+  router.run(req, res)
 end
 
 server.start
