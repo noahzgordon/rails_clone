@@ -1,7 +1,7 @@
 require 'uri'
 
 class Params
-  def initialize(req, route_params={})
+  def initialize(req, route_params = {})
     @params = {}
 
     @params.merge!(route_params)
@@ -20,11 +20,11 @@ class Params
   end
 
   def permit(*keys)
-    @permitted.push *keys
+    @permitted.push(*keys)
   end
 
   def require(key)
-    raise AttributeNotFoundError unless @params.has_key?(key)
+    raise AttributeNotFoundError unless @params.key?(key)
     @params[key]
   end
 
@@ -36,9 +36,10 @@ class Params
     @params.to_json.to_s
   end
 
-  class AttributeNotFoundError < ArgumentError; end;
+  class AttributeNotFoundError < ArgumentError; end
 
   private
+
   def parse_www_encoded_form(www_encoded_form)
     params = {}
 
