@@ -50,13 +50,14 @@ end
 describe Router do
   let(:req) { WEBrick::HTTPRequest.new(:Logger => nil) }
   let(:res) { WEBrick::HTTPResponse.new(:HTTPVersion => '1.0') }
+  let(:dummy_pattern) { Regexp.new("$^") }
 
   describe "#add_route" do
     it "adds a route" do
-      subject.add_route(1, 2, 3, 4)
+      subject.add_route(dummy_pattern, 2, 3, 4)
       subject.routes.count.should == 1
-      subject.add_route(1, 2, 3, 4)
-      subject.add_route(1, 2, 3, 4)
+      subject.add_route(dummy_pattern, 2, 3, 4)
+      subject.add_route(dummy_pattern, 2, 3, 4)
       subject.routes.count.should == 3
     end
   end
@@ -81,7 +82,7 @@ describe Router do
 
   describe "#run" do
     it "sets status to 404 if no route is found" do
-      subject.add_route(1, 2, 3, 4)
+      subject.add_route(dummy_pattern, 2, 3, 4)
       req.stub(:path) { "/users" }
       req.stub(:request_method) { :get }
       subject.run(req, res)
