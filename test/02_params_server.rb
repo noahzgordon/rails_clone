@@ -32,9 +32,9 @@ end
 server.mount_proc '/' do |req, res|
   case req.path
   when '/'
-    contr = ExampleController.new(req, res, {}).create
+    ExampleController.new(req, res, {}).create
   when '/new'
-    contr = ExampleController.new(req, res, {}).new
+    ExampleController.new(req, res, {}).new
   end
 end
 
