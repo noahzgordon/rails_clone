@@ -7,7 +7,7 @@ class Route
   end
 
   def matches?(req)
-    (http_method == req.request_method.downcase.to_sym) && !!(pattern =~ req.path)
+    http_method == req.request_method.downcase.to_sym && pattern.match(req.path)
   end
 
   def run(req, res)
@@ -55,12 +55,10 @@ class Router
   end
 
   def run(req, res)
-    matching_route = match(req)
-
-    if matching_route.nil?
-      res.status = 404
-    else
+    if matching_route = match(req)
       matching_route.run(req, res)
+    else
+      res.status = 404
     end
   end
 end
