@@ -9,6 +9,7 @@ module Phase5
     def initialize(req, route_params = {})
       @params = route_params
       parse_www_encoded_form(req.query_string)
+      parse_www_encoded_form(req.body)
     end
 
     def [](key)
@@ -31,13 +32,27 @@ module Phase5
       return nil if www_encoded_form.nil?
 
       URI::decode_www_form(www_encoded_form).each do |pair|
-        @params[pair.first] = pair.last
+        parsed_keys = parse_key(pair.first)
+        first_key = parsed_keys.first
+
+        current_level = @params
+
+        parsed_keys.each_with_index do |key, i|
+          if key == parsed_keys.last
+            current_level[key] = pair.last
+          else
+            current_level[key] ||= {}
+          end
+
+          current_level = current_level[key]
+        end
       end
     end
 
     # this should return an array
     # user[address][street] should return ['user', 'address', 'street']
     def parse_key(key)
+      key.split(/\]\[|\[|\]/)
     end
   end
 end
