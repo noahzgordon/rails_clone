@@ -7,9 +7,12 @@ module Phase5
     # 2. post body
     # 3. route params
     def initialize(req, route_params = {})
+      @params = route_params
+      parse_www_encoded_form(req.query_string)
     end
 
     def [](key)
+      @params[key.to_sym] || @params[key.to_s]
     end
 
     def to_s
@@ -25,6 +28,11 @@ module Phase5
     # should return
     # { "user" => { "address" => { "street" => "main", "zip" => "89436" } } }
     def parse_www_encoded_form(www_encoded_form)
+      return nil if www_encoded_form.nil?
+
+      URI::decode_www_form(www_encoded_form).each do |pair|
+        @params[pair.first] = pair.last
+      end
     end
 
     # this should return an array
