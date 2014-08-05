@@ -33,6 +33,7 @@ class CatsController < Phase7::ControllerBase
       flash[:notice] = "Cat saved!"
       redirect_to("/cats")
     else
+      flash[:error] = "Invalid cat!"
       render :new
     end
   end
