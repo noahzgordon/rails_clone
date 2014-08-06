@@ -1,5 +1,9 @@
 require 'webrick'
-require_relative '../lib/phase8/controller_base.rb'
+require_relative '../lib/controller_base.rb'
+require_relative '../lib/router.rb'
+require_relative '../lib/flash.rb'
+require_relative '../lib/session.rb'
+require_relative '../lib/params.rb'
 
 class Cat
   attr_reader :name, :owner
@@ -25,7 +29,7 @@ class Cat
   end
 end
 
-class CatsController < Phase7::ControllerBase
+class CatsController < ControllerBase
   def create
     @cat = Cat.new(params["cat"])
     if @cat.save
@@ -48,7 +52,7 @@ class CatsController < Phase7::ControllerBase
   end
 end
 
-router = Phase6::Router.new
+router = Router.new
 router.draw do
   get Regexp.new("^/cats$"), CatsController, :index
   get Regexp.new("^/cats/new$"), CatsController, :new
