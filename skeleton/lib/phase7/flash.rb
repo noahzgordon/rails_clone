@@ -10,8 +10,6 @@ module Phase7
 
       @flash_hash = JSON.parse(req_cookie.value) unless req_cookie.nil?
       @incoming_keys = @flash_hash.keys
-
-      puts req.cookies
     end
 
     def [](key)
@@ -24,7 +22,6 @@ module Phase7
 
     def store_flash(res)
       remove_incoming_keys
-      puts @flash_hash
 
       res_cookie = WEBrick::Cookie.new(
         "_rails_lite_flash",
@@ -39,8 +36,6 @@ module Phase7
     private
 
     def remove_incoming_keys
-      puts @incoming_keys
-      puts "In remove-incoming_keys"
       @incoming_keys.each { |key| @flash_hash.delete(key) }
     end
   end

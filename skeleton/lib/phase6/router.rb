@@ -24,6 +24,7 @@ module Phase6
 
       data.names.each { |name| params[name] = data[name.to_sym] }
 
+      p "In run"
       controller_class.new(req, res, params).invoke_action(action_name)
     end
   end
