@@ -6,6 +6,7 @@ module UrlHelper
     controller_name = self.name
 
     prefix = /(.+)_controller/.match(controller_name.underscore)[1]
+    single_prefix = prefix.singularize
 
     case action
       when :new
@@ -17,7 +18,7 @@ module UrlHelper
           pattern[1...-1]
         end
       when :show
-        define_method("#{prefix.singularize}_url") do |obj|
+        define_method("#{single_prefix}_url") do |obj|
           pattern[1...-1].gsub(/\(.+\)/, obj.id.to_s)
         end
       when :index
@@ -25,15 +26,15 @@ module UrlHelper
           pattern[1...-1]
         end
       when :edit
-        define_method("edit_#{prefix.singularize}_url") do |obj|
+        define_method("edit_#{single_prefix}_url") do |obj|
           pattern[1...-1].gsub(/\(.+\)/, obj.id.to_s)
         end
       when :update
-        define_method("#{prefix.singularize}_url") do |obj|
+        define_method("#{single_prefix}_url") do |obj|
           pattern[1...-1].gsub(/\(.+\)/, obj.id.to_s)
         end
       when :destroy
-        define_method("#{prefix.singularize}_url") do |obj|
+        define_method("#{single_prefix}_url") do |obj|
           pattern[1...-1].gsub(/\(.+\)/, obj.id.to_s)
         end
       else

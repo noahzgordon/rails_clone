@@ -5,6 +5,8 @@ class Route
   def initialize(pattern, http_method, controller_class, action_name)
     @pattern, @http_method, @controller_class, @action_name =
       pattern, http_method, controller_class, action_name
+
+    controller_class.add_url_helper(pattern, action_name)
   end
 
   # checks if pattern matches path and method matches request method
@@ -23,8 +25,6 @@ class Route
     params = {}
 
     data.names.each { |name| params[name] = data[name.to_sym] }
-
-    controller_class.add_url_helper(pattern, action_name)
 
     controller = controller_class.new(req, res, params).invoke_action(action_name)
   end

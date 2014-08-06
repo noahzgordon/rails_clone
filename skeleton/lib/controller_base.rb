@@ -49,8 +49,6 @@ class ControllerBase
     template = File.read("views/#{view_path}/#{template_name}.html.erb")
     erb_template = ERB.new(template).result(binding)
 
-    p erb_template
-    p "Got to render"
     form_finder = /<form.*\>(.|\s)*\<\/form\>/
     store_auth_token if !!form_finder.match(erb_template)
 

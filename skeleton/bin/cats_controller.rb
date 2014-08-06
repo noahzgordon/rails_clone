@@ -3,7 +3,7 @@ class CatsController < ControllerBase
     @cat = Cat.new(params["cat"])
     if @cat.save
       flash[:notice] = "Cat saved!"
-      redirect_to cats_url
+      redirect_to cat_url(@cat)
     else
       flash[:error] = "Invalid cat!"
       redirect_to new_cat_url
