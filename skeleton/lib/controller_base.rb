@@ -20,8 +20,8 @@ class ControllerBase
   def redirect_to(url)
     raise "Can not build two responses!" if already_built_response?
 
-    res.status = 302
-    res.header["location"] = url
+    @res.status = 302
+    @res.header["location"] = url
 
     session.store_session(@res)
     flash.store_flash(@res)
@@ -45,23 +45,32 @@ class ControllerBase
     template = File.read("views/#{view_path}/#{template_name}.html.erb")
     erb_template = ERB.new(template).result(binding)
 
+    p erb_template
+    p "Got to render"
+    form_finder = /<form.*\>(.|\s)*\<\/form\>/
+    store_auth_token if !!form_finder.match(erb_template)
+
     self.render_content(erb_template, "text/html")
   end
 
   def invoke_action(name)
-    if name != :get && !protected_from_csrf?
-      @res.status = 404
+
+    if !!@req.body && !protected_from_csrf?
+      @res.status = 403
+      render_content("403: Don't hack me, bro!", "text/html")
+    else
+      self.send(name)
+      render name unless already_built_response?
     end
-
-    self.send(name)
-
-    render name unless already_built_response?
   end
 
   def protected_from_csrf?
-    puts "In protection method"
-    return false if self.params[:authenticity_token].nil?
-    self.params[:authenticity_token] == form_authenticity_token
+    self.params[:authenticity_token] == session[:authenticity_token]
+  end
+
+  def store_auth_token
+    p "Got to store_auth"
+    session[:authenticity_token] = form_authenticity_token
   end
 
   def session
