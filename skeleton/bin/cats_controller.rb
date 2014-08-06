@@ -11,7 +11,7 @@ class CatsController < ControllerBase
   end
 
   def show
-    @cat = Cat.all.find{ |cat| cat.id == params["cat_id"]}
+    @cat = Cat.all.find{ |cat| cat.id == params[:cat_id]}
   end
 
   def index

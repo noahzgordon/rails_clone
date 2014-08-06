@@ -6,12 +6,13 @@ class Route
     @pattern, @http_method, @controller_class, @action_name =
       pattern, http_method, controller_class, action_name
 
+
+    @regexp = Regexp.new(pattern)
     controller_class.add_url_helper(pattern, action_name)
   end
 
   # checks if pattern matches path and method matches request method
   def matches?(req)
-    @regexp = Regexp.new(pattern)
     return nil unless @regexp.is_a? Regexp
 
     !@regexp.match(req.path).nil? &&
@@ -21,7 +22,7 @@ class Route
   # use pattern to pull out route params (save for later?)
   # instantiate controller and call controller action
   def run(req, res)
-    data = pattern.match(req.path)
+    data = @regexp.match(req.path)
     params = {}
 
     data.names.each { |name| params[name] = data[name.to_sym] }
