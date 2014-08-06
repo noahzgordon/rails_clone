@@ -1,8 +1,10 @@
 class Cat
-  attr_reader :name, :owner
+  attr_reader :name, :owner, :id
+
+  $id_counter = 0
 
   def self.all
-    @cat ||= []
+    @cats ||= []
   end
 
   def initialize(params = {})
@@ -13,11 +15,14 @@ class Cat
   def save
     return false unless @name.present? && @owner.present?
 
+    @id = $id_counter
+    $id_counter += 1
+
     Cat.all << self
     true
   end
 
   def inspect
-    { name: name, owner: owner }.inspect
+    { id: id, name: name, owner: owner }.inspect
   end
 end

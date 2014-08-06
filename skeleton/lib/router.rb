@@ -5,14 +5,14 @@ class Route
   def initialize(pattern, http_method, controller_class, action_name)
     @pattern, @http_method, @controller_class, @action_name =
       pattern, http_method, controller_class, action_name
-
   end
 
   # checks if pattern matches path and method matches request method
   def matches?(req)
-    return nil unless @pattern.is_a? Regexp
+    @regexp = Regexp.new(pattern)
+    return nil unless @regexp.is_a? Regexp
 
-    !@pattern.match(req.path).nil? &&
+    !@regexp.match(req.path).nil? &&
     http_method == req.request_method.downcase.to_sym
   end
 
@@ -24,7 +24,9 @@ class Route
 
     data.names.each { |name| params[name] = data[name.to_sym] }
 
-    controller_class.new(req, res, params).invoke_action(action_name)
+    controller_class.add_url_helper(pattern, action_name)
+
+    controller = controller_class.new(req, res, params).invoke_action(action_name)
   end
 end
 

@@ -1,0 +1,45 @@
+require 'active_support/core_ext'
+
+module UrlHelper
+
+  def add_url_helper(pattern, action)
+    controller_name = self.name
+
+    prefix = /(.+)_controller/.match(controller_name.underscore)[1]
+
+    case action
+      when :new
+        define_method("new_#{prefix.singularize}_url") do
+          pattern[1...-1]
+        end
+      when :create
+        define_method("#{prefix}_url") do
+          pattern[1...-1]
+        end
+      when :show
+        define_method("#{prefix.singularize}_url") do |obj|
+          pattern[1...-1].gsub(/\(.+\)/, obj.id.to_s)
+        end
+      when :index
+        define_method("#{prefix}_url") do
+          pattern[1...-1]
+        end
+      when :edit
+        define_method("edit_#{prefix.singularize}_url") do |obj|
+          pattern[1...-1].gsub(/\(.+\)/, obj.id.to_s)
+        end
+      when :update
+        define_method("#{prefix.singularize}_url") do |obj|
+          pattern[1...-1].gsub(/\(.+\)/, obj.id.to_s)
+        end
+      when :destroy
+        define_method("#{prefix.singularize}_url") do |obj|
+          pattern[1...-1].gsub(/\(.+\)/, obj.id.to_s)
+        end
+      else
+        define_method("#{prefix}_#{action}_url") do
+          pattern[1...-1]
+        end
+    end
+  end
+end

@@ -3,11 +3,15 @@ class CatsController < ControllerBase
     @cat = Cat.new(params["cat"])
     if @cat.save
       flash[:notice] = "Cat saved!"
-      redirect_to("/cats")
+      redirect_to cats_url
     else
       flash[:error] = "Invalid cat!"
-      render :new
+      redirect_to new_cat_url
     end
+  end
+
+  def show
+    @cat = Cat.all.find{ |cat| cat.id == params["cat_id"]}
   end
 
   def index

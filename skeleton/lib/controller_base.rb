@@ -1,7 +1,11 @@
 require 'active_support/core_ext'
 require 'erb'
 
+require_relative "./url_helper.rb"
+
 class ControllerBase
+  extend UrlHelper
+
   attr_reader :req, :res, :params, :form_authenticity_token
 
   def initialize(req, res, route_params = {})
@@ -54,7 +58,6 @@ class ControllerBase
   end
 
   def invoke_action(name)
-
     if !!@req.body && !protected_from_csrf?
       @res.status = 403
       render_content("403: Don't hack me, bro!", "text/html")
@@ -69,7 +72,6 @@ class ControllerBase
   end
 
   def store_auth_token
-    p "Got to store_auth"
     session[:authenticity_token] = form_authenticity_token
   end
 

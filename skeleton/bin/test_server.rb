@@ -12,9 +12,10 @@ require_relative './cats_controller.rb'
 router = Router.new
 
 router.draw do
-  get Regexp.new("^/cats$"), CatsController, :index
-  get Regexp.new("^/cats/new$"), CatsController, :new
-  post Regexp.new("^/cats$"), CatsController, :create
+  get "^/cats$", CatsController, :index
+  get "^/cats/new$", CatsController, :new
+  post "^/cats$", CatsController, :create
+  get "^/cats/(?<cat_id>\\d+)$", CatsController, :show
 end
 
 server = WEBrick::HTTPServer.new(Port: 3000)
