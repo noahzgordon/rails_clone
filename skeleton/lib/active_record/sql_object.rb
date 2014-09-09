@@ -25,6 +25,7 @@ class SQLObject
   end
 
   def self.table_name
+    return "humans" if self.to_s == "Human"
     @table_name ||= self.to_s.downcase.tableize
   end
 

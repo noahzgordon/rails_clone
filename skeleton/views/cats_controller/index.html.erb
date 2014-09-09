@@ -1,5 +1,8 @@
 <%= flash[:notice] %>
 
 <h1>ALL THE CATS</h1>
-<pre><%= @cats.to_s %></pre>
+<% @cats.each do |cat| %>
+	<p><%= cat.name %></p>
+	<p>Owner: <%= cat.owner.fname %></p>
+<% end %>
 <a href="/cats/new">New cat!</a>
