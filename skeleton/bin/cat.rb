@@ -1,28 +1,23 @@
-class Cat
-  attr_reader :name, :owner, :id
+require "../lib/active_record/core.rb"
 
-  $id_counter = 0
+class Cat < SQLObject
+  attr_reader :name, :owner_id, :id
+  
+  belongs_to (
+    :owner, 
+    class_name: "Human",
+    foreign_key: :owner_id,
+    primary_key: :id
+  )
+end
 
-  def self.all
-    @cats ||= []
-  end
-
-  def initialize(params = {})
-    params ||= {}
-    @name, @owner = params["name"], params["owner"]
-  end
-
-  def save
-    return false unless @name.present? && @owner.present?
-
-    @id = $id_counter
-    $id_counter += 1
-
-    Cat.all << self
-    true
-  end
-
-  def inspect
-    { id: id, name: name, owner: owner }.inspect
-  end
+class Human < SQLObject
+  attr_reader :id, :fname, :lname
+  
+  has_many (
+    :cats,
+    class_name: "Cat",
+    foreign_key: :owner_id,
+    primary_key: :id
+  )
 end

@@ -1,4 +1,3 @@
-require_relative '02_searchable'
 require 'active_support/inflector'
 
 # Phase IVa
@@ -93,6 +92,7 @@ module Associatable
 
       source_options.model_class.new(result)
     end
+  end
 
   def assoc_options
     @assoc_options ||= {}
