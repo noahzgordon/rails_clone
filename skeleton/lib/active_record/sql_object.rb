@@ -49,7 +49,7 @@ class SQLObject
   end
 
   def self.find(id)
-    params = DBConnection.execute(<<-SQL, id)
+    params = DBConnection.execute(<<-SQL, id.to_i)
       SELECT
         *
       FROM

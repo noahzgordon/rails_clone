@@ -2,7 +2,8 @@
 
 <h1>ALL THE CATS</h1>
 <% @cats.each do |cat| %>
-	<p><%= cat.name %></p>
+	<p><a href='<%= cat_url(cat) %>'><%= cat.name %></a></p>
 	<p>Owner: <%= cat.owner.fname %></p>
+	<p>Home Address: <%= cat.home.address %></p>
 <% end %>
-<a href="/cats/new">New cat!</a>
+<a href="<%= new_cat_url %>">New cat!</a>

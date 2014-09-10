@@ -9,6 +9,9 @@ class Cat < SQLObject
     foreign_key: :owner_id,
     primary_key: :id
   )
+  
+  has_one_through :home, :owner, :home
+  
 end
 
 class Human < SQLObject
@@ -18,6 +21,24 @@ class Human < SQLObject
     :cats,
     class_name: "Cat",
     foreign_key: :owner_id,
+    primary_key: :id
+  )
+  
+  belongs_to(
+    :home,
+    class_name: "House",
+    foreign_key: :house_id,
+    primary_key: :id
+  )
+end
+
+class House < SQLObject
+  attr_reader :address
+  
+  has_many(
+    :humans,
+    class_name: "Humans",
+    foreign_key: :house_id,
     primary_key: :id
   )
 end
