@@ -46,7 +46,7 @@ class ControllerBase
   def render(template_name)
     view_path = self.class.name.underscore
 
-    template = File.read("skeleton/views/#{view_path}/#{template_name}.html.erb")
+    template = File.read("views/#{view_path}/#{template_name}.html.erb")
     erb_template = ERB.new(template).result(binding)
 
     form_finder = /<form.*\>(.|\s)*\<\/form\>/
