@@ -6,8 +6,10 @@ require_relative '../lib/flash.rb'
 require_relative '../lib/session.rb'
 require_relative '../lib/params.rb'
 
-require_relative './cat.rb'
-require_relative './cats_controller.rb'
+require_relative '../models/cat.rb'
+require_relative '../models/human.rb'
+require_relative '../models/house.rb'
+require_relative '../controllers/cats_controller.rb'
 
 router = Router.new
 

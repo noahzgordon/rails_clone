@@ -1,30 +1,36 @@
-# rails_lite_
+# Ruby on 'Trails'
+
+*To test out the framework, clone the directory and naviage to it in your terminal. Then run:
+
+<code>ruby bin/test_server.rb</code>
 
 A clone of Rails, the popular application development framework.
 
 Much of the work on this project was done with the guidance and assistance
 of App Academy's top-notch instructurs. But the following features were built
-up from scratch!
+up from scratch, all by my lonesome!
 
 ##Bonus Features:
-+ Consolidation of all "phases" into a single folder
-  - The original project proceeded in phases, with a spec to guide each
-    phase. I've simplified this down to make it easier to manage.
-  - I've also thrown out the specs, which no longer apply.
++ Consolidation of files into an intuitive structure.
+  - System files are located in the 'lib' directory, and execution files are located in the 'bin' directory. Subject to change.
 + The Flash
   - for quick and easy errors/notices!
-  - still need to implement flash.now
-+ CSRF protection
-  - via an authenticity token stored on the session
+  - messages are stored on a cookie and wiped on subsequent requests. 
++ CSRF protection.
+  - via an authenticity token stored on the session cookie.
++ Functional URL Helpers
+	- Uses Ruby metaprogramming to defined a custom URL helper method on a controller whenever a new route is called.
++ ActiveRecord
+  - the largest addition; allows Rails models to interact and fetch dynamically from a SQLite database.
+  - SQLObjects (similar to ActiveRecord::Base) can persist to the database via instance methods, and can be fetched via the "all" and "where" methods.
+  - Heavy use Ruby metaprogramming and custom SQL queries.
+  - IN PROGRESS: Implementation of a Relation class which allows method calls to be chained.
 
 ###To-Do
-+ a routes.rb file which automatically writes routes
-+ URL Helpers and URLHelper module
-+ link_to and button_to helpers
-+ support for rendering partials
-+ nested routing
-+ integration with ActiveRecord::Lite
-  - another project from earlier in the term; there's work to do
-    here as well!
-
++ Completion of the ActiveRecord Relation, with chainable #where and #includes methods.
++ a routes.rb file which automatically writes routes.
++ URL Helpers and URLHelper module.
++ link_to and button_to helpers.
++ support for rendering partials.
++ nested routing.
 
