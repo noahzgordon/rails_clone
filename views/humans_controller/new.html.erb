@@ -1,0 +1,16 @@
+<%= flash[:error] %>
+
+<form action="<%= humans_url %>" method="POST">
+  <input type="hidden" name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
+  <label>First Name
+    <input type="text" name="human[fname]" value="<%= @human.fname %>">
+  </label>
+	
+  <label>Last Name
+    <input type="text" name="human[lname]" value="<%= @human.lname %>">
+  </label>
+
+  <input type="submit">
+</form>

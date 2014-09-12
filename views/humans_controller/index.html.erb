@@ -2,15 +2,5 @@
 <% @humans.each do |human| %>
 	<p><a href='<%= human_url(human) %>'><%= human.fname %> <%= human.lname %></a></p>
 	<p>Home Address: <%= human.home.address %></p>
-	<h3>Cats</h3>
-	<% if human.cats.load.empty? %>
-		<p>This human has no cats!</p>
-	<% else %>
-	<ul>
-		<% human.cats.load.each do |cat| %>
-			<li><a href='<%= cat_url(cat) %>'><%= cat.name %></a></li>
-		<% end %>
-	</ul>
-	<% end %>
 <% end %>
 <a href="<%= new_human_url %>">New human!</a>

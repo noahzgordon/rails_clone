@@ -1,0 +1,21 @@
+<%= flash[:notice] %>
+
+<p>Name: <%= @human.fname %></p>
+<p>Owner: <%= @human.lname %></p>
+
+<% if @human.home %>
+	<p>Home address: <%= @human.home.address %></p>
+<% end %>
+
+<h3>Cats</h3>
+<% if @human.cats.load.empty? %>
+	<p>This human has no cats!</p>
+<% else %>
+<ul>
+	<% @human.cats.load.each do |cat| %>
+		<li><a href='<%= cat_url(cat) %>'><%= cat.name %></a></li>
+	<% end %>
+</ul>
+<% end %>
+
+<a href="<%= humans_url %>">Back to Humans Index</a>

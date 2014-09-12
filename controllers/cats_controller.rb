@@ -6,13 +6,12 @@ class CatsController < ControllerBase
       redirect_to cat_url(@cat)
     else
       flash[:error] = "Invalid cat!"
-      redirect_to new_cat_url
+      render :new
     end
   end
 
   def show
     @cat = Cat.find(params[:cat_id])
-    p @cat
     render :show
   end
 
