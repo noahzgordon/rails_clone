@@ -1,6 +1,6 @@
 # Ruby on 'Trails'
 
-*To test out the framework, clone the directory and naviage to it in your terminal. Then run:
+*To test out the framework, clone the directory and navigate to it in your terminal. Then run:
 
 <code>ruby bin/test_server.rb</code>
 
