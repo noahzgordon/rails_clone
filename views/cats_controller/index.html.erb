@@ -1,6 +1,4 @@
-<%= flash[:notice] %>
-
-<h1>ALL THE CATS</h1>
+<h1>All Kitty Cats</h1>
 <% @cats.each do |cat| %>
 	<p><a href='<%= cat_url(cat) %>'><%= cat.name %></a></p>
 	<p>Owner: <%= cat.owner.fname %></p>

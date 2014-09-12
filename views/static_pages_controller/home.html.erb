@@ -1,0 +1,18 @@
+<h1>Welcome to my Sample Application!</h1>
+
+<p>This is a very simple app designed to show off the features of the framework it's built on. Check out the links below the visit the various resource index pages. From there you can test out the site's CRUD features.</p>
+
+<ul>
+	<li><a href="<%= humans_url %>">Humans Index</a></li>
+	<li><a href="<%= cats_url %>">Cats Index</a></li>
+	<li><a href="<%= houses_url %>">Houses Index</a></li>
+</ul>
+
+<h3>Ruby on Trails</h3>
+
+<p>The site is built on top of a light clone of the Rails framework. ActiveRecord objects are created and communicate with a SQLite database. Relations are passed to controllers, instances of which are instantiated by a router that interprets the URL path into an associated action. The controller action is then called, rendering a view or redirecting to a specified page.</p>
+
+<p>As a bonus, the site makes use of URL helpers which are defined on the controller immediately when a route is called via Ruby metaprogramming. It also enables flash messages, which are stored on a special cookie and wiped on the next request.</p>
+
+<p>If you have any questions, you can send them to noah.zachary.gordon@gmail.com</p>
+

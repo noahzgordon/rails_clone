@@ -2,8 +2,8 @@ require 'active_support/core_ext'
 
 module UrlHelper
 
-  def add_url_helper(pattern, action)
-    controller_name = self.name
+  def add_url_helper(controller_class, pattern, action)
+    controller_name = controller_class.name
 
     prefix = /(.+)_controller/.match(controller_name.underscore)[1]
     single_prefix = prefix.singularize
@@ -25,6 +25,8 @@ module UrlHelper
         define_method("#{prefix}_url") do
           pattern[1...-1]
         end
+        
+        puts prefix
       when :edit
         define_method("edit_#{single_prefix}_url") do |obj|
           pattern[1...-1].gsub(/\(.+\)/, obj.id.to_s)

@@ -8,7 +8,7 @@ class Route
 
 
     @regexp = Regexp.new(pattern)
-    controller_class.add_url_helper(pattern, action_name)
+    ControllerBase.add_url_helper(controller_class, pattern, action_name)
   end
 
   # checks if pattern matches path and method matches request method
