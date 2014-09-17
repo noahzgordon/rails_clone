@@ -1,8 +1,10 @@
-# Ruby on 'Trails'
-
 *To test out the framework, clone the directory and navigate to it in your terminal. Then run:
 
 <code>ruby bin/test_server.rb</code>
+
+This will set up a WEBrick server listening on port 3000. Finally, navigate in your web broswer of choice to <code>localhost:3000</code>.
+
+# Ruby on 'Trails'
 
 A clone of Rails, the popular application development framework.
 
