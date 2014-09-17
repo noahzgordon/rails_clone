@@ -9,6 +9,7 @@ class AssocOptions
   )
 
   def model_class
+    puts @class_name
     @class_name.constantize
   end
 

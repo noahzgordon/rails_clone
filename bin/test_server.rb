@@ -28,7 +28,11 @@ router.draw do
   get "^/cats/new$", CatsController, :new
   post "^/cats$", CatsController, :create
   get "^/cats/(?<cat_id>\\d+)$", CatsController, :show
+  
   get "^/houses$", HousesController, :index
+  get "^/houses/new$", HousesController, :new
+  post "^/houses$", HousesController, :create
+  get "^/houses/(?<house_id>\\d+)$", HousesController, :show
 end
 
 server = WEBrick::HTTPServer.new(Port: 3000)

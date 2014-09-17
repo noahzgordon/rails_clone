@@ -1,0 +1,18 @@
+<%= flash[:notice] %>
+
+<h1>Address: <%= @house.address %></h1>
+
+<h3>Humans who live here:</h3>
+<% if @house.humans.load.empty? %>
+	<p>None! It's a spooky abandoned house.</p>
+<% else %>
+	<ul>
+		<% @house.humans.load.each do |human| %>
+			<li><a href='<%= human_url(human) %>'>
+				<%= human.fname %> <%= human.lname %>
+			</a></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<a href="<%= houses_url %>">Back to Houses Index</a>

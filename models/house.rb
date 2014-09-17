@@ -3,7 +3,7 @@ class House < SQLObject
   
   has_many(
     :humans,
-    class_name: "Humans",
+    class_name: "Human",
     foreign_key: :house_id,
     primary_key: :id
   )

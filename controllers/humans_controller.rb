@@ -18,6 +18,7 @@ class HumansController < ControllerBase
 
   def new
     @human = Human.new
+    @houses = House.all
     render :new
   end
   

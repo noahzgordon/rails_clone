@@ -1,0 +1,5 @@
+<h1>All Houses</h1>
+<% @houses.each do |house| %>
+	<p><a href='<%= house_url(house) %>'><%= house.address %></a></p>
+<% end %>
+<a href="<%= new_house_url %>">New house!</a>

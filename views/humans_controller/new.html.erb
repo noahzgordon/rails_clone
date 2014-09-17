@@ -11,6 +11,14 @@
   <label>Last Name
     <input type="text" name="human[lname]" value="<%= @human.lname %>">
   </label>
+	
+	<label>House
+		<select name="human[house_id]">
+			<% @houses.each do |house| %>
+				<option value="<%= house.id %>"><%= house.address %></option>
+			<% end %>
+		</select>
+	</label>
 
   <input type="submit">
 </form>

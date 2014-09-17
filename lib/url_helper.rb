@@ -21,6 +21,8 @@ module UrlHelper
         define_method("#{single_prefix}_url") do |obj|
           pattern[1...-1].gsub(/\(.+\)/, obj.id.to_s)
         end
+        
+        puts single_prefix
       when :index
         define_method("#{prefix}_url") do
           pattern[1...-1]
